@@ -1,11 +1,18 @@
-export interface Player {
-  id: string;
+export interface IPlayer {
+  id: number;
   firstName: string;
   lastName: string;
   nickname?: string;
   skillRate: number;
-  prefferedPosition?: 'GOALKEEPER' | 'DEFENDER' | 'MIDFILDER' | 'FORWARD';
+  preferredPosition?: PreferredPostionEnum;
   isApproved: boolean;
   createdAt: string;
-  udpatedAt: string;
+  updatedAt: string;
+}
+
+export enum PreferredPostionEnum {
+  GOALKEEPER = 'GOALKEEPER',
+  DEFENDER = 'DEFENDER',
+  MIDFIELDER = 'MIDFIELDER',
+  FORWARD = 'FORWARD',
 }
