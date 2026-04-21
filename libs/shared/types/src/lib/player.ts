@@ -4,7 +4,7 @@ export interface IPlayer {
   lastName: string;
   nickname?: string;
   skillRate: number;
-  preferredPosition?: PreferredPostionEnum;
+  preferredPosition: PreferredPostionEnum;
   isApproved: boolean;
   createdAt: string;
   updatedAt: string;

@@ -12,7 +12,7 @@ export class AppService {
         skillRate: 10,
         isApproved: true,
         createdAt: '',
-        udpatedAt: '',
+        updatedAt: '',
         preferredPosition: PreferredPostionEnum.DEFENDER,
       },
     };
