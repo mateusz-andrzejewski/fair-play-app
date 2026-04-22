@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IPlayer, PreferredPostionEnum } from '@fair-play-app/types';
+import { IPlayer, PreferredPositionEnum } from '@fair-play-app/types';
 
 @Injectable()
 export class AppService {
@@ -13,7 +13,7 @@ export class AppService {
         isApproved: true,
         createdAt: '',
         updatedAt: '',
-        preferredPosition: PreferredPostionEnum.DEFENDER,
+        preferredPosition: PreferredPositionEnum.DEFENDER,
       },
     };
   }

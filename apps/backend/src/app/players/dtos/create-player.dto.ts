@@ -1,4 +1,4 @@
-import { PreferredPostionEnum } from '@fair-play-app/types';
+import { PreferredPositionEnum } from '@fair-play-app/types';
 import {
   IsBoolean,
   IsEnum,
@@ -26,8 +26,8 @@ export class CreatePlayerDto {
   skillRate!: number;
 
   @IsNotEmpty()
-  @IsEnum(PreferredPostionEnum)
-  preferredPostion!: PreferredPostionEnum;
+  @IsEnum(PreferredPositionEnum)
+  preferredPosition!: PreferredPositionEnum;
 
   @IsNotEmpty()
   @IsBoolean()

@@ -4,13 +4,13 @@ export interface IPlayer {
   lastName: string;
   nickname?: string;
   skillRate: number;
-  preferredPosition: PreferredPostionEnum;
+  preferredPosition: PreferredPositionEnum;
   isApproved: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export enum PreferredPostionEnum {
+export enum PreferredPositionEnum {
   GOALKEEPER = 'GOALKEEPER',
   DEFENDER = 'DEFENDER',
   MIDFIELDER = 'MIDFIELDER',

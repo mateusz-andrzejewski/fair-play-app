@@ -7,7 +7,7 @@ datasource db {
   provider = "postgresql"
 }
 
-enum PreferredPostion {
+enum PreferredPosition {
   GOALKEEPER
   DEFENDER
   MIDFIELDER
@@ -20,9 +20,11 @@ model Player {
   lastName String
   nickname String?
   skillRate Int
-  preferredPosition PreferredPostion?
+  preferredPosition PreferredPosition?
   isApproved Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("players")
 }
 
