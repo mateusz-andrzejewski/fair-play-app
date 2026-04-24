@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, MatButtonModule, MatDividerModule, MatIconModule],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
