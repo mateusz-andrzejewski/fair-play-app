@@ -1,4 +1,4 @@
-import { IsBoolean, IsEnum, IsInt, IsOptional, IsString, Max, Min } from "class-validator";
+import { IsBoolean, IsEnum, IsIn, IsInt, IsOptional, IsString, Max, Min } from "class-validator";
 import { PreferredPositionEnum } from "libs/shared/types/src/lib/types";
 import { Transform } from "class-transformer";
 
@@ -42,7 +42,7 @@ export class FindPlayersQueryDto {
     sortBy?: string = 'lastName';
 
     @IsOptional()
-    @IsString()
+    @IsIn(['asc', 'desc'])
     sortOrder?: 'asc' | 'desc' = 'asc';
 
 

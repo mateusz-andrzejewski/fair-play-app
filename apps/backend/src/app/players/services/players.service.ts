@@ -90,7 +90,11 @@ export class PlayersService {
             };
             
         } catch (error: unknown) {
-
+            if (error instanceof BadRequestException) {
+                throw error;
+            }
+            console.error(error);
+            throw new InternalServerErrorException('Failed to find players.');
         }
     }
 
