@@ -5,11 +5,12 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+
 import { PrismaService } from '../../core/prisma.service';
-import { Player, Prisma } from 'apps/backend/generated/prisma/client';
 import { CreatePlayerDto } from '../dtos/create-player.dto';
-import { UpdatePlayerDto } from '../dtos/update-player.dto';
 import { FindPlayersQueryDto } from '../dtos/find-players.dto';
+import { UpdatePlayerDto } from '../dtos/update-player.dto';
+import { Prisma, Player } from 'apps/backend/generated/prisma/client';
 
 @Injectable()
 export class PlayersService {
@@ -33,10 +34,12 @@ export class PlayersService {
       > = [
         'firstName',
         'lastName',
+        'nickname',
         'skillRate',
         'preferredPosition',
         'isApproved',
         'createdAt',
+        'updatedAt',
       ];
 
       if (
@@ -47,7 +50,7 @@ export class PlayersService {
         throw new BadRequestException(`Invalid sortBy field: ${sortBy}`);
       }
 
-      if (sortOrder !== 'asc' && sortOrder !== 'desc') {
+      if (!['asc', 'desc'].includes(sortOrder)) {
         throw new BadRequestException(`Invalid sortOrder value: ${sortOrder}`);
       }
 
@@ -58,23 +61,22 @@ export class PlayersService {
             mode: 'insensitive',
           },
         }),
+
         ...(lastName && {
           lastName: {
             contains: lastName,
             mode: 'insensitive',
           },
         }),
-        ...(preferredPosition && {
-          preferredPosition,
-        }),
-        ...(typeof isApproved === 'boolean' && {
-          isApproved,
-        }),
+
+        ...(preferredPosition && { preferredPosition }),
+
+        ...(isApproved && { isApproved }),
       };
 
       const skip = (page - 1) * limit;
 
-      const [data, total] = await this._prismaService.$transaction([
+      const [data, count] = await this._prismaService.$transaction([
         this._prismaService.player.findMany({
           where,
           skip,
@@ -91,12 +93,11 @@ export class PlayersService {
       return {
         data,
         meta: {
-          total,
           page,
           limit,
-          totalPages: Math.ceil(total / limit),
+          totalPages: count / limit,
           hasPreviousPage: page > 1,
-          hasNextPage: page < Math.ceil(total / limit),
+          hasNextPage: page < count / limit - 1,
         },
       };
     } catch (error: unknown) {
