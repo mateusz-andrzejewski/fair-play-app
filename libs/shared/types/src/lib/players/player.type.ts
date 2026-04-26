@@ -1,4 +1,6 @@
-export interface IPlayer {
+import { PreferredPositionEnum } from './player-position.enum';
+
+export interface Player {
   id: number;
   firstName: string;
   lastName: string;
@@ -8,11 +10,4 @@ export interface IPlayer {
   isApproved: boolean;
   createdAt: string;
   updatedAt: string;
-}
-
-export enum PreferredPositionEnum {
-  GOALKEEPER = 'GOALKEEPER',
-  DEFENDER = 'DEFENDER',
-  MIDFIELDER = 'MIDFIELDER',
-  FORWARD = 'FORWARD',
 }

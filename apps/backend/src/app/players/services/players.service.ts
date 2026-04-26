@@ -24,7 +24,7 @@ export class PlayersService {
         preferredPosition,
         isApproved,
         page = 1,
-        limit = 10,
+        limit = 1,
         sortBy = 'lastName',
         sortOrder = 'asc',
       } = findPlayersQueryDto;
@@ -71,7 +71,7 @@ export class PlayersService {
 
         ...(preferredPosition && { preferredPosition }),
 
-        ...(isApproved && { isApproved }),
+        ...(isApproved !== undefined && isApproved !== null && { isApproved }),
       };
 
       const skip = (page - 1) * limit;
@@ -95,7 +95,8 @@ export class PlayersService {
         meta: {
           page,
           limit,
-          totalPages: count / limit,
+          totalItems: count,
+          totalPages: Math.ceil(count / limit),
           hasPreviousPage: page > 1,
           hasNextPage: page < count / limit - 1,
         },
