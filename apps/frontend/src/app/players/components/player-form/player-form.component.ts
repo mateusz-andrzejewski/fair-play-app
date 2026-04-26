@@ -1,4 +1,6 @@
+import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -10,8 +12,17 @@ import {
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',
-  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose],
+  imports: [
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    NgClass,
+  ],
 })
 export class PlayerFormComponent {
-  dialogData = inject<{ title: string; passedData: any }>(MAT_DIALOG_DATA);
+  dialogData = inject<{ title: string; passedData: any; size: string }>(
+    MAT_DIALOG_DATA,
+  );
 }

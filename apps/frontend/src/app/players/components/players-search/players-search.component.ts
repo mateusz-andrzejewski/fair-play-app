@@ -21,6 +21,7 @@ import { PlayersService } from '../../services/players.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfigDialog, DialogService } from '../../../shared/dialog.service';
 import { PlayerFormComponent } from '../player-form/player-form.component';
+import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
 
 @Component({
   selector: 'app-players-search',
@@ -128,10 +129,12 @@ export class PlayersSearchComponent implements OnInit {
     const config: ConfigDialog = {
       data: {
         title: selectedPlayer ? 'Edytuj gracza' : 'Dodaj gracza',
+        size: DialogSizeEnum.lg,
         passedData: selectedPlayer,
       },
     };
-    this.dialogService.open(PlayerFormComponent, config);
+    const dialogRef = this.dialogService.open(PlayerFormComponent, config);
+    dialogRef.subscribe((res) => console.log(res));
   }
 
   private setPlayersData(players: Player[]): void {
