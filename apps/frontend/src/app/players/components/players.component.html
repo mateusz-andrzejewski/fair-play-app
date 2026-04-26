@@ -1,11 +1,13 @@
 <section class="bg-gray-600 p-5">
-  <form (ngSubmit)="onSearch()" class="flex align-middle">
-    <div class="flex justify-between flex-1">
-      <mat-form-field class="example-full-width">
+  <form (ngSubmit)="onSearch()" class="grid grid-cols-1 lg:grid-cols-4">
+    <div
+      class="grid lg:col-span-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 flex-1"
+    >
+      <mat-form-field>
         <mat-label>Imię</mat-label>
         <input [formControl]="form.controls.firstName" matInput />
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <mat-label>Nazwisko</mat-label>
         <input [formControl]="form.controls.lastName" matInput />
       </mat-form-field>
@@ -31,8 +33,18 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="min-w-80 flex justify-center align-middle">
-      <button type="submit" class="w-1/2" matButton="filled">Szukaj</button>
+
+    <div class="flex justify-end gap-2 px-2">
+      <button type="submit" class="max-w-60 flex-1" matButton="filled">
+        Szukaj
+      </button>
+      <button
+        (click)="clearFilters()"
+        matMiniFab
+        aria-label="Example icon button with a delete icon"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
   </form>
 </section>

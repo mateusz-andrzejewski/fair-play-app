@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,6 +18,7 @@ import {
   SortOrder,
 } from '@fair-play-app/types';
 import { PlayersService } from '../services/players.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-players',
@@ -33,6 +34,7 @@ import { PlayersService } from '../services/players.service';
     MatPaginatorModule,
     MatSortModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
 })
 export class PlayerComponent implements OnInit {
@@ -114,6 +116,10 @@ export class PlayerComponent implements OnInit {
       this.setPlayersData(playersList.data);
       this.setPaginationData(playersList.meta);
     });
+  }
+
+  clearFilters() {
+    this.form.reset();
   }
 
   private setPlayersData(players: Player[]): void {
