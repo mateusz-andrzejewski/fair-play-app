@@ -43,7 +43,7 @@ export class FindPlayersQueryDto {
   @IsInt()
   @Min(1)
   @Max(100)
-  limit = 1;
+  limit = 10;
 
   @IsOptional()
   @IsString()

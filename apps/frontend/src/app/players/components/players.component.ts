@@ -42,7 +42,7 @@ export class PlayerComponent implements OnInit {
 
   totalItems = 0;
   pageIndex = 0;
-  pageSize = 5;
+  pageSize = 10;
 
   currentSort?: Sort;
 

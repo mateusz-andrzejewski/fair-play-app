@@ -24,7 +24,7 @@ export class PlayersService {
         preferredPosition,
         isApproved,
         page = 1,
-        limit = 1,
+        limit = 10,
         sortBy = 'lastName',
         sortOrder = 'asc',
       } = findPlayersQueryDto;
