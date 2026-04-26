@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { PlayerComponent } from './players/components/players.component';
+import { PlayersSearchComponent } from './players/components/players-search/players-search.component';
 import { PlayersListResolver } from './players/resolvers/players.resolver';
 
 export const appRoutes: Route[] = [
@@ -10,7 +10,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'players',
-    component: PlayerComponent,
+    component: PlayersSearchComponent,
     resolve: { playersList: PlayersListResolver },
   },
 ];

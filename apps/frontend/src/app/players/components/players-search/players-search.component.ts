@@ -17,13 +17,14 @@ import {
   PreferredPositionEnum,
   SortOrder,
 } from '@fair-play-app/types';
-import { PlayersService } from '../services/players.service';
+import { PlayersService } from '../../services/players.service';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfigDialog, DialogService } from '../../../shared/dialog.service';
+import { PlayerFormComponent } from '../player-form/player-form.component';
 
 @Component({
-  selector: 'app-players',
-  templateUrl: 'players.component.html',
-  styleUrls: ['players.component.scss'],
+  selector: 'app-players-search',
+  templateUrl: 'players-search.component.html',
   imports: [
     FormsModule,
     MatFormFieldModule,
@@ -37,9 +38,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
   ],
 })
-export class PlayerComponent implements OnInit {
+export class PlayersSearchComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private playersService = inject(PlayersService);
+  private dialogService = inject(DialogService);
   private fb = new FormBuilder();
 
   totalItems = 0;
@@ -120,6 +122,16 @@ export class PlayerComponent implements OnInit {
 
   clearFilters() {
     this.form.reset();
+  }
+
+  openDialog(selectedPlayer?: Player) {
+    const config: ConfigDialog = {
+      data: {
+        title: selectedPlayer ? 'Edytuj gracza' : 'Dodaj gracza',
+        passedData: selectedPlayer,
+      },
+    };
+    this.dialogService.open(PlayerFormComponent, config);
   }
 
   private setPlayersData(players: Player[]): void {
