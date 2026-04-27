@@ -1,21 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, MatButtonModule, MatDividerModule, MatIconModule],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App implements OnInit {
+export class App {
   protected title = 'frontend';
-  httpService = inject(HttpClient);
-  tst!: any;
-
-  ngOnInit(): void {
-    this.httpService
-      .get<{ message: string }>('http://localhost:3000/api')
-      .subscribe((res: { message: string }) => (this.tst = res.message));
-  }
 }

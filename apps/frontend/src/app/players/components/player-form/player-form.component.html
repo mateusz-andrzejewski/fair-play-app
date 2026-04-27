@@ -1,0 +1,8 @@
+<div [ngClass]="dialogData.size">
+  <h2 mat-dialog-title class="text-lg">{{ dialogData.title }}</h2>
+  <section mat-dialog-content>content</section>
+  <mat-dialog-actions align="end">
+    <button matButton mat-dialog-close>Anuluj</button>
+    <button matButton [mat-dialog-close]="true" cdkFocusInitial>Zapisz</button>
+  </mat-dialog-actions>
+</div>
