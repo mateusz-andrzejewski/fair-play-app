@@ -1,11 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSortModule, Sort } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -39,11 +39,13 @@ import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
     MatIconModule,
   ],
 })
-export class PlayersSearchComponent implements OnInit {
+export class PlayersSearchComponent implements OnInit, AfterViewInit {
   private route = inject(ActivatedRoute);
   private playersService = inject(PlayersService);
   private dialogService = inject(DialogService);
   private fb = new FormBuilder();
+
+  @ViewChild(MatSort) sort!: MatSort;
 
   totalItems = 0;
   pageIndex = 0;
@@ -96,6 +98,15 @@ export class PlayersSearchComponent implements OnInit {
     this.setPaginationData(this.playersListFromResolver.meta);
   }
 
+  ngAfterViewInit(): void {
+    this.sort.active = 'lastName';
+    this.sort.direction = 'desc';
+    this.sort.sortChange.emit({
+      active: 'lastName',
+      direction: 'desc',
+    });
+  }
+
   onSearch(): void {
     this.pageIndex = 0;
     this.getPlayers();
@@ -103,6 +114,7 @@ export class PlayersSearchComponent implements OnInit {
 
   onSortChange(sort: Sort): void {
     this.currentSort = sort;
+    console.log('current sort', sort)
     this.pageIndex = 0;
     this.getPlayers();
   }
@@ -123,6 +135,17 @@ export class PlayersSearchComponent implements OnInit {
 
   clearFilters() {
     this.form.reset();
+    this.pageIndex = 0;
+    this.currentSort = { active: 'lastName', direction: 'asc' };
+    if (this.sort) {
+    this.sort.active = 'lastName';
+    this.sort.direction = 'desc';
+    this.sort.sortChange.emit({
+      active: 'lastName',
+      direction: 'desc',
+    });
+  }
+    this.getPlayers();
   }
 
   openDialog(selectedPlayer?: Player) {
@@ -157,8 +180,8 @@ export class PlayersSearchComponent implements OnInit {
       isApproved: formValue.isApproved ?? undefined,
       page: this.pageIndex + 1,
       limit: this.pageSize,
-      sortBy: $event?.active as PlayerSortBy,
-      sortOrder: $event?.direction as SortOrder,
+      sortBy: this.currentSort?.active as PlayerSortBy,
+      sortOrder: this.currentSort?.direction as SortOrder,
     };
   }
 }
