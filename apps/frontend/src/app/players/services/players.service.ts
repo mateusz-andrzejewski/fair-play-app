@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { PlayersApiService } from './players-api.service';
-import { PlayersListQuery } from '@fair-play-app/types';
+import { PlayerCreatePayload, PlayersListQuery } from '@fair-play-app/types';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,30 @@ import { PlayersListQuery } from '@fair-play-app/types';
 export class PlayersService {
   playersApiService = inject(PlayersApiService);
 
+    readonly positionList = [
+          {
+      viewValue: 'Bramkarz',
+      value: 'GOALKEEPER',
+    },
+    {
+      viewValue: 'Obrońca',
+      value: 'DEFENDER',
+    },
+        {
+      viewValue: 'Pomocnik',
+      value: 'MIDFIELDER',
+    },
+        {
+      viewValue: 'Napastnik',
+      value: 'FORWARD',
+    },
+  ];
+
   getPlayers(payload?: PlayersListQuery) {
     return this.playersApiService.getPlayers(payload);
+  }
+
+  createPlayer(payload: PlayerCreatePayload) {
+    return this.playersApiService.createPlayer(payload);
   }
 }

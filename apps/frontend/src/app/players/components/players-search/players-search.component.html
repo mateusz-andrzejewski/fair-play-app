@@ -21,17 +21,6 @@
           }
         </mat-select>
       </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Czy zatwierdzony</mat-label>
-        <mat-select [formControl]="form.controls.isApproved">
-          @for (option of yesNoList; track option) {
-            <mat-option [value]="option.value">{{
-              option.viewValue
-            }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
     </div>
 
     <div class="flex justify-center lg:justify-end gap-2 px-2">
@@ -86,14 +75,6 @@
       <td mat-cell *matCellDef="let element">
         {{ element.preferredPosition }}
       </td>
-    </ng-container>
-
-    <!-- Is approved Column -->
-    <ng-container matColumnDef="isApproved">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="isApproved">
-        Zatwierdzenie
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.isApproved }}</td>
     </ng-container>
 
     <!-- Is approved Column -->

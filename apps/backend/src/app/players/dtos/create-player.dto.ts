@@ -28,8 +28,4 @@ export class CreatePlayerDto {
   @IsNotEmpty()
   @IsEnum(PreferredPositionEnum)
   preferredPosition!: PreferredPositionEnum;
-
-  @IsNotEmpty()
-  @IsBoolean()
-  isApproved!: boolean;
 }

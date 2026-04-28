@@ -29,8 +29,6 @@ export class FindPlayersQueryDto {
     if (value === 'false') return false;
     return value;
   })
-  @IsBoolean()
-  isApproved?: boolean;
 
   @IsOptional()
   @Transform(({ value }) => Number(value))

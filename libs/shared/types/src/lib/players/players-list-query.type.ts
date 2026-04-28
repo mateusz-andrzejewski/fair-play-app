@@ -4,7 +4,6 @@ export interface PlayersListQuery {
   firstName?: string;
   lastName?: string;
   preferredPosition?: PreferredPositionEnum;
-  isApproved?: boolean;
   page?: number;
   limit?: number;
   sortBy?: PlayerSortBy;
@@ -19,6 +18,5 @@ export type PlayerSortBy =
   | 'nickname'
   | 'skillRate'
   | 'preferredPosition'
-  | 'isApproved'
   | 'createdAt'
   | 'updatedAt';

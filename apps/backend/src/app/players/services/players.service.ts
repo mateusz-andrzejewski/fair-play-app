@@ -22,7 +22,6 @@ export class PlayersService {
         firstName,
         lastName,
         preferredPosition,
-        isApproved,
         page = 1,
         limit = 10,
         sortBy = 'lastName',
@@ -37,7 +36,6 @@ export class PlayersService {
         'nickname',
         'skillRate',
         'preferredPosition',
-        'isApproved',
         'createdAt',
         'updatedAt',
       ];
@@ -70,8 +68,6 @@ export class PlayersService {
         }),
 
         ...(preferredPosition && { preferredPosition }),
-
-        ...(isApproved !== undefined && isApproved !== null && { isApproved }),
       };
 
       const skip = (page - 1) * limit;

@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { PlayersListQuery, PlayersListResponse } from '@fair-play-app/types';
+import { PlayerCreatePayload, PlayersListQuery, PlayersListResponse } from '@fair-play-app/types';
 import { Observable } from 'rxjs';
 
 const BASE_URL = 'http://localhost:3000/api';
-const GET_PLAYERS_URL = `${BASE_URL}/players`;
+const PLAYERS_URL = `${BASE_URL}/players`;
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +21,12 @@ export class PlayersApiService {
         }
       });
     }
-    return this._httpClient.get<PlayersListResponse>(GET_PLAYERS_URL, {
+    return this._httpClient.get<PlayersListResponse>(PLAYERS_URL, {
       params,
     });
+  }
+
+  createPlayer(payload: PlayerCreatePayload): Observable<any> {
+    return this._httpClient.post(PLAYERS_URL, payload)
   }
 }

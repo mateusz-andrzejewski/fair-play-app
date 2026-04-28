@@ -59,19 +59,13 @@ export class PlayersSearchComponent implements OnInit, AfterViewInit {
     firstName: this.fb.control<string | null>(null),
     lastName: this.fb.control<string | null>(null),
     preferredPosition: this.fb.control<PreferredPositionEnum | null>(null),
-    isApproved: this.fb.control<boolean | null>(null),
   });
 
   playersListFromResolver = this.route.snapshot.data[
     'playersList'
   ] as PlayersListResponse;
 
-  positionList = [
-    {
-      viewValue: 'Obrońca',
-      value: 'DEFENDER',
-    },
-  ];
+  positionList = this.playersService.positionList;
 
   yesNoList = [
     {
@@ -88,7 +82,6 @@ export class PlayersSearchComponent implements OnInit, AfterViewInit {
     'firstName',
     'lastName',
     'preferredPosition',
-    'isApproved',
     'nickname',
     'skillRate',
   ];
@@ -114,7 +107,6 @@ export class PlayersSearchComponent implements OnInit, AfterViewInit {
 
   onSortChange(sort: Sort): void {
     this.currentSort = sort;
-    console.log('current sort', sort)
     this.pageIndex = 0;
     this.getPlayers();
   }
@@ -157,7 +149,11 @@ export class PlayersSearchComponent implements OnInit, AfterViewInit {
       },
     };
     const dialogRef = this.dialogService.open(PlayerFormComponent, config);
-    dialogRef.subscribe((res) => console.log(res));
+    dialogRef.subscribe((res) => {
+      if (res?.action === 'save') {
+        this.getPlayers();
+      }
+    });
   }
 
   private setPlayersData(players: Player[]): void {
@@ -177,7 +173,6 @@ export class PlayersSearchComponent implements OnInit, AfterViewInit {
       firstName: formValue.firstName ?? undefined,
       lastName: formValue.lastName ?? undefined,
       preferredPosition: formValue.preferredPosition ?? undefined,
-      isApproved: formValue.isApproved ?? undefined,
       page: this.pageIndex + 1,
       limit: this.pageSize,
       sortBy: this.currentSort?.active as PlayerSortBy,

@@ -7,7 +7,6 @@ export interface Player {
   nickname?: string;
   skillRate: number;
   preferredPosition: PreferredPositionEnum;
-  isApproved: boolean;
   createdAt: string;
   updatedAt: string;
 }
