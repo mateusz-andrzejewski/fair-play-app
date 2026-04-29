@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { PlayersApiService } from './players-api.service';
-import { PlayerCreatePayload, PlayersListQuery } from '@fair-play-app/types';
+import { PlayerCreatePayload, PlayerEditPayload, PlayersListQuery } from '@fair-play-app/types';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +33,13 @@ export class PlayersService {
 
   createPlayer(payload: PlayerCreatePayload) {
     return this.playersApiService.createPlayer(payload);
+  }
+
+  editPlayer(id: number, payload: PlayerEditPayload) {
+    return this.playersApiService.editPlayer(id, payload);
+  }
+
+  deletePlayer(id: number) {
+    return this.playersApiService.deletePlayer(id);
   }
 }

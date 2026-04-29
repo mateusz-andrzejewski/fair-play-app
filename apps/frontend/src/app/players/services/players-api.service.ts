@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { PlayerCreatePayload, PlayersListQuery, PlayersListResponse } from '@fair-play-app/types';
+import { PlayerCreatePayload, PlayerEditPayload, PlayersListQuery, PlayersListResponse } from '@fair-play-app/types';
 import { Observable } from 'rxjs';
 
 const BASE_URL = 'http://localhost:3000/api';
@@ -28,5 +28,13 @@ export class PlayersApiService {
 
   createPlayer(payload: PlayerCreatePayload): Observable<any> {
     return this._httpClient.post(PLAYERS_URL, payload)
+  }
+
+  editPlayer(id: number, payload: PlayerEditPayload): Observable<any> {
+    return this._httpClient.patch(`${PLAYERS_URL}/${id}`, payload);
+  }
+
+  deletePlayer(id: number): Observable<any> {
+    return this._httpClient.delete(`${PLAYERS_URL}/${id}`);
   }
 }

@@ -7,6 +7,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
 import {
   PaginationMeta,
@@ -19,9 +20,13 @@ import {
 } from '@fair-play-app/types';
 import { PlayersService } from '../../services/players.service';
 import { MatIconModule } from '@angular/material/icon';
-import { ConfigDialog, DialogService } from '../../../shared/dialog.service';
+import { ConfigDialog, DialogService } from '../../../shared/services/dialog.service';
 import { PlayerFormComponent } from '../player-form/player-form.component';
 import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
+import { DialogActionEnum } from '../../../shared/enums/dialog-action.enum';
+import { ConfirmationModalComponent } from '../../../shared/components/confirmation-modal/confirmation-modal.component';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { PlayerViewComponent } from '../player-view/player-view.component';
 
 @Component({
   selector: 'app-players-search',
@@ -37,12 +42,14 @@ import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
     MatSortModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatMenuModule
   ],
 })
 export class PlayersSearchComponent implements OnInit, AfterViewInit {
   private route = inject(ActivatedRoute);
   private playersService = inject(PlayersService);
   private dialogService = inject(DialogService);
+  private snackbarService = inject(SnackbarService);
   private fb = new FormBuilder();
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -84,6 +91,7 @@ export class PlayersSearchComponent implements OnInit, AfterViewInit {
     'preferredPosition',
     'nickname',
     'skillRate',
+    'actions'
   ];
 
   ngOnInit(): void {
@@ -150,10 +158,40 @@ export class PlayersSearchComponent implements OnInit, AfterViewInit {
     };
     const dialogRef = this.dialogService.open(PlayerFormComponent, config);
     dialogRef.subscribe((res) => {
-      if (res?.action === 'save') {
+      if (res?.action === DialogActionEnum.SAVE || res?.action === DialogActionEnum.EDIT) {
         this.getPlayers();
       }
     });
+  }
+
+  openConfirmDialog(player: Player) {
+    const config: ConfigDialog = {
+      data: {
+        title: 'Wymagane potwierdzenie',
+        size: DialogSizeEnum.md,
+        passedData: { element: player, message: `Czy na pewno chcesz usunąć gracza ${player.firstName} ${player.lastName}?` },
+      }
+    }
+    const dialogRef = this.dialogService.open(ConfirmationModalComponent, config);
+    dialogRef.subscribe((res) => {
+      if (res?.action === DialogActionEnum.CONFIRM) {
+        this.playersService.deletePlayer(player.id).subscribe(() => {
+          this.snackbarService.openSnackBar('Gracz został usunięty');
+          this.getPlayers();
+        });
+      }
+    });
+  }
+
+  openDetailsDialog(player: Player) {
+    const config: ConfigDialog = {
+      data: {
+        title: 'Szczegóły gracza',
+        size: DialogSizeEnum.md,
+        passedData: player,
+      }
+    }
+    this.dialogService.open(PlayerViewComponent, config);
   }
 
   private setPlayersData(players: Player[]): void {

@@ -6,3 +6,4 @@ export * from './players/player-position.enum';
 export * from './players/player-list-response';
 export * from './players/players-list-query.type';
 export * from './players/player-create.payload';
+export * from './players/player-edit.payload';

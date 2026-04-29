@@ -1,0 +1,38 @@
+<div [ngClass]="dialogData.size">
+  <h2 mat-dialog-title class="text-lg">{{ dialogData.title }}</h2>
+  <section mat-dialog-content>
+    <div class="grid grid-col-1 gap-2">
+        <div class="flex gap-4">
+            <span class="font-bold min-w-[7rem]">Imię:</span>
+            <span>{{ dialogData.passedData.firstName }}</span>
+        </div>
+        <div class="flex gap-4">
+            <span class="font-bold min-w-[7rem]">Nazwisko:</span>
+            <span>{{ dialogData.passedData.lastName }}</span>
+        </div>
+        <div class="flex gap-4">
+            <span class="font-bold min-w-[7rem]">Pozycja:</span>
+            <span>{{ dialogData.passedData.preferredPosition }}</span>
+        </div>
+        <div class="flex gap-4">
+            <span class="font-bold min-w-[7rem]">Skillrate:</span>
+            <span>{{ dialogData.passedData.skillRate }}</span>
+        </div>
+        <div class="flex gap-4">
+            <span class="font-bold min-w-[7rem]">Pseudonim:</span>
+            <span>{{ dialogData.passedData.nickname }}</span>
+        </div>
+        <div class="flex gap-4">
+            <span class="font-bold min-w-[7rem]">Data dodania:</span>
+            <span>{{ dialogData.passedData.createdAt | date:'yyyy-MM-dd' }}</span>
+        </div>
+         <div class="flex gap-4">
+            <span class="font-bold min-w-[7rem]">Data modyfikacji:</span>
+            <span>{{ dialogData.passedData.updatedAt | date:'yyyy-MM-dd' }}</span>
+        </div>
+    </div>
+  </section>
+  <mat-dialog-actions align="end">
+    <button matButton (click)="onClose()">Zamknij</button>
+  </mat-dialog-actions>
+</div>
