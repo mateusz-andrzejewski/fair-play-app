@@ -2,12 +2,13 @@ import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/co
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatMenuModule} from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
 import {
   PaginationMeta,
@@ -18,15 +19,15 @@ import {
   PreferredPositionEnum,
   SortOrder,
 } from '@fair-play-app/types';
-import { PlayersService } from '../../services/players.service';
-import { MatIconModule } from '@angular/material/icon';
-import { ConfigDialog, DialogService } from '../../../shared/services/dialog.service';
-import { PlayerFormComponent } from '../player-form/player-form.component';
-import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
-import { DialogActionEnum } from '../../../shared/enums/dialog-action.enum';
 import { ConfirmationModalComponent } from '../../../shared/components/confirmation-modal/confirmation-modal.component';
+import { DialogActionEnum } from '../../../shared/enums/dialog-action.enum';
+import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
+import { ConfigDialog, DialogService } from '../../../shared/services/dialog.service';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { PlayersService } from '../../services/players.service';
+import { PlayerFormComponent } from '../player-form/player-form.component';
 import { PlayerViewComponent } from '../player-view/player-view.component';
+import { TestIdDirective } from '../../../shared/directives/testId.directive';
 
 @Component({
   selector: 'app-players-search',
@@ -42,7 +43,8 @@ import { PlayerViewComponent } from '../player-view/player-view.component';
     MatSortModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    TestIdDirective
   ],
 })
 export class PlayersSearchComponent implements OnInit, AfterViewInit {

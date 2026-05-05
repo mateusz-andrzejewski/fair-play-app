@@ -5,14 +5,14 @@
       <div class="flex flex-col">
             <mat-form-field>
               <mat-label>Imię</mat-label>
-              <input [formControl]="form.controls.firstName" matInput />
+              <input [formControl]="form.controls.firstName" matInput testId="firstNameDialog" />
             </mat-form-field>
             <app-form-field-error [control]="form.controls.firstName"></app-form-field-error>
       </div>
       <div class="flex flex-col">
       <mat-form-field>
         <mat-label>Nazwisko</mat-label>
-        <input [formControl]="form.controls.lastName" matInput />
+        <input [formControl]="form.controls.lastName" matInput testId="lastNameDialog" />
       </mat-form-field>
       <app-form-field-error [control]="form.controls.lastName"></app-form-field-error>
     </div>
@@ -20,7 +20,7 @@
     <div class="flex flex-col">  
       <mat-form-field>
         <mat-label>Pozycja</mat-label>
-        <mat-select [formControl]="form.controls.preferredPosition">
+        <mat-select [formControl]="form.controls.preferredPosition" testId="preferredPositionDialog">
           @for (option of positionList; track option) {
             <mat-option [value]="option.value">{{
               option.viewValue
@@ -33,20 +33,20 @@
     <div class="flex flex-col">  
       <mat-form-field>
         <mat-label>Stopień umiejętności</mat-label>
-        <input [formControl]="form.controls.skillRate" matInput type="number" min="1" max="10" />
+        <input [formControl]="form.controls.skillRate" matInput type="number" min="1" max="10" testId="skillRateDialog" />
       </mat-form-field>
       <app-form-field-error [control]="form.controls.skillRate"></app-form-field-error>
     </div>
     <div class="flex flex-col">
       <mat-form-field>
         <mat-label>Pseudonim</mat-label>
-        <input [formControl]="form.controls.nickname" matInput />
+        <input [formControl]="form.controls.nickname" matInput testId="nicknameDialog" />
       </mat-form-field>
       <app-form-field-error [control]="form.controls.nickname"></app-form-field-error>
     </div>
     </form>
   </section>
-  <mat-dialog-actions align="end">
+  <mat-dialog-actions align="end"> 
     <button matButton (click)="onClose()">Anuluj</button>
     <button matButton  cdkFocusInitial (click)="onSave()">Zapisz</button>
   </mat-dialog-actions>

@@ -18,6 +18,7 @@ import { DialogActionEnum } from '../../../shared/enums/dialog-action.enum';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { PlayersService } from '../../services/players.service';
 import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
+import { TestIdDirective } from '../../../shared/directives/testId.directive';
 
 @Component({
   selector: 'app-player-form',
@@ -33,6 +34,7 @@ import { DialogSizeEnum } from '../../../shared/enums/dialog-size.enum';
     MatInputModule,
     MatSelectModule,
     FormFieldErrorComponent,
+    TestIdDirective
   ],
 })
 export class PlayerFormComponent implements OnInit {
