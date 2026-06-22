@@ -5,15 +5,15 @@
     >
       <mat-form-field>
         <mat-label>Imię</mat-label>
-        <input testId="firstName" [formControl]="form.controls.firstName" matInput />
+        <input testId="firstNameFilter" [formControl]="form.controls.firstName" matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Nazwisko</mat-label>
-        <input testId="lastName" [formControl]="form.controls.lastName" matInput />
+        <input testId="lastNameFilter" [formControl]="form.controls.lastName" matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Pozycja</mat-label>
-        <mat-select testId="preferredPosition" [formControl]="form.controls.preferredPosition">
+        <mat-select testId="preferredPositionFilter" [formControl]="form.controls.preferredPosition">
           @for (option of positionList; track option) {
             <mat-option [value]="option.value">{{
               option.viewValue

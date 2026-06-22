@@ -1,8 +1,8 @@
 import { expect, Page } from "@playwright/test";
-import { createTestPlayer } from "./player.factory";
+import { createTestPlayer, TestPlayerData } from "./player.factory";
 
 // create player by clicking through the ui
-export async function createPlayerByUI(page: Page) {
+export async function createPlayerByUI(page: Page): Promise<TestPlayerData> {
     const playerData = createTestPlayer(Date.now());
     //Implementation of creating a player through the UI using the playerData object
      await page.goto('/players');
@@ -23,5 +23,6 @@ export async function createPlayerByUI(page: Page) {
         await expect(dialog.getByTestId('skillRateDialog')).toHaveValue(playerData.skillRate);
         await expect(dialog.getByTestId('nicknameDialog')).toHaveValue(playerData.nickname);
         await expect(dialog.getByTestId('preferredPositionDialog')).toContainText(playerData.preferredPosition);
+        return playerData;
     
 }
