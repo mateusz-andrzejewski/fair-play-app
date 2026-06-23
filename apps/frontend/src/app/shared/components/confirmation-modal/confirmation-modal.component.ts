@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatD
 import { DialogActionEnum } from "../../enums/dialog-action.enum";
 import { DialogService } from "../../services/dialog.service";
 import { SnackbarService } from "../../services/snackbar.service";
+import { TestIdDirective } from "../../directives/testId.directive";
 
 @Component({
     selector: "app-confirmation-modal",
@@ -15,6 +16,7 @@ import { SnackbarService } from "../../services/snackbar.service";
         MatDialogContent,
         MatDialogActions,
         NgClass,
+        TestIdDirective
     ]
 })
 export class ConfirmationModalComponent {

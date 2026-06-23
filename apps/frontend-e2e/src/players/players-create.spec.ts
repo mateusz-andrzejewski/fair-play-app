@@ -1,9 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { createPlayerByUI } from './helpers/create-player-by-ui.helper';
 import { searchPlayerByUI } from './helpers/search-player-by-ui.helper';
-import { createTestPlayer } from './helpers/player.factory';
 
-test('should create player and how him on the list', async({page})=> {
+test('should create player', async({page})=> {
     // Given: start on the players page
     await page.goto('/players');
 
@@ -15,5 +14,7 @@ test('should create player and how him on the list', async({page})=> {
 
     // And: click at save button
     await dialog.getByTestId('savePlayerButton').click();
+
+    // Then: find a player at the list
     await searchPlayerByUI(page, playerData);
 })

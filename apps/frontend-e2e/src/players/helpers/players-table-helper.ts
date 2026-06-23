@@ -1,1 +1,0 @@
-// assert that the right player is displayed in the table

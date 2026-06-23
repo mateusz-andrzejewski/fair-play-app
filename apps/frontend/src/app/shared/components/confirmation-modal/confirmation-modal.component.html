@@ -4,7 +4,7 @@
     <p>{{ dialogData.passedData.message }}</p>
   </section>
   <mat-dialog-actions align="end">
-    <button matButton (click)="onClose()">Anuluj</button>
-    <button matButton color="warn" cdkFocusInitial (click)="onConfirm()">Potwierdź</button>
+    <button  testId="cancelDeleteButton" matButton (click)="onClose()">Anuluj</button>
+    <button testId="confirmDeleteButton" matButton color="warn" cdkFocusInitial (click)="onConfirm()">Potwierdź</button>
   </mat-dialog-actions>
 </div>
