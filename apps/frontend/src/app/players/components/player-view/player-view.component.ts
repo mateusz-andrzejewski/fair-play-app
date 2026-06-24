@@ -5,6 +5,7 @@ import { MatDialogTitle, MatDialogContent, MatDialogActions, MAT_DIALOG_DATA, Ma
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { Player } from "@fair-play-app/types";
 import { DialogSizeEnum } from "../../../shared/enums/dialog-size.enum";
+import { TestIdDirective } from "../../../shared/directives/testId.directive";
 
 @Component({
     selector: "app-player-view",
@@ -15,7 +16,8 @@ import { DialogSizeEnum } from "../../../shared/enums/dialog-size.enum";
         MatDialogContent,
         MatDialogActions,
         NgClass,
-        DatePipe
+        DatePipe,
+        TestIdDirective
     ]
 })
 export class PlayerViewComponent {
